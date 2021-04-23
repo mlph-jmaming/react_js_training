@@ -5,35 +5,35 @@ import "./Home.css"
 
 const tileData = [
     {
-        image: "https://d33wubrfki0l68.cloudfront.net/66f9b8c9992a0bbafbc9f7a9259f35b5483e08ba/208f5/assets/login-page-added.png",
-        title: "test title1"
+        image: "https://www.gizmochina.com/wp-content/uploads/2020/09/Snapdragon-750G.jpg",
+        title: "Qualcom Processor"
     },
     {
-        image: "./Home.css",
-        title: "test 2"
+        image: "https://i.ytimg.com/vi/_X3_uZSEfQo/maxresdefault.jpg",
+        title: "Best blender"
     }
     , {
-        image: "./cart.jpeg",
-        title: "test title3"
+        image: "https://qph.fs.quoracdn.net/main-qimg-80f9d3bcd38a461b08cbe52f4b13dca0.webp",
+        title: "Inter core i7 Processor"
     },
     {
-        image: "./Home.css",
-        title: "test 24"
+        image: "https://static.digit.in/default/0cf2958a6d320d63675714cb9d67050be37c8753.jpeg",
+        title: "China Android Phone"
     }, {
-        image: "./cart.jpeg",
-        title: "test title"
+        image: "https://static.digit.in/default/af95abb7dda55996880198f9507dfcf0e87368fe.jpeg",
+        title: "Samsung Android"
     },
     {
-        image: "./Home.css",
-        title: "test 25"
+        image: "https://s01.sgp1.cdn.digitaloceanspaces.com/article/127664-csdgcybqaf-1568959931.jpg",
+        title: "Buy 1 take 3"
     },
     {
-        image: "./cart.jpeg",
-        title: "test title6"
+        image: "https://cdn.mos.cms.futurecdn.net/wVGsPeyZgPdC4ior5Dc8wc.jpg",
+        title: "Android 10 mobile phone"
     },
     {
-        image: "./Home.css",
-        title: "test 27"
+        image: "https://www.zdnet.com/a/hub/i/r/2019/05/24/4444c3cd-36d5-4b81-a1c2-b817f6383226/resize/1200x900/2eae6eac09800e8cd03d48f60170f033/microsoft-launcher-android.jpg",
+        title: "New Smart phone"
     }
 ];
 

@@ -1,11 +1,12 @@
 import { Component } from "react";
-import "./item.css"
+import "./OrderItem.css";
 
-class Item extends Component {
+class OrderItem extends Component {
 
     state = {
         imageUrl: this.props.imageUrl,
-        title: this.props.title
+        title: this.props.title,
+        status: 'pending'
     }
 
     render() {
@@ -15,12 +16,13 @@ class Item extends Component {
                     src={this.state.imageUrl}></img>
                 <div>
                     <p className="center-text">{this.state.title}</p>
-                    <div className="button-container">
-                        <a className="buy-style">Buy</a>
+                    <div className="button-container ">
+                        <a>Status : {this.state.status}</a>
+                        <a className="view-style">View</a>
                     </div>
                 </div>
             </div>
         );
     }
 }
-export default Item;
+export default OrderItem;

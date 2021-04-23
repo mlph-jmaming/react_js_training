@@ -5,6 +5,7 @@ import Home from './screens/home/Home';
 import Login from './screens/login/Login';
 import Register from './screens/register/Register'
 import Dialog from '@material-ui/core/Dialog';
+import Order from './screens/order/Order';
 
 var isLogin = false;
 
@@ -22,7 +23,7 @@ const App = () => {
   };
 
   const registerOnClick = () => {
-    isLogin = false;
+    console.log(isLogin);
     setOpen(true);
   }
 
@@ -37,7 +38,7 @@ const App = () => {
           </div>
           <div label="About Us">
             <div className="content">
-              <a>About us</a>!
+              <Order />
             </div>
           </div>
           <div label="Contact Us">
@@ -55,7 +56,7 @@ const App = () => {
 
       <Dialog open={open} onClose={handleClose}>
         {
-          isLogin ? <Login /> : <Register />
+          isLogin ? <Login handleClose={handleClose} /> : <Register handleClose={handleClose} />
         }
       </Dialog>
     </div>
