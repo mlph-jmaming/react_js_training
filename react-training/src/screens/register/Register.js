@@ -34,28 +34,33 @@ class Register extends Component {
     }
 
     onTextChange = (event, type) => {
+        const userState = { ...this.state.user };
         switch (type) {
             case Constants.FIRST_NAME: {
-                this.state.user.firstName = event.target.value;
+                userState.firstName = event.target.value;
                 break;
             }
             case Constants.LAST_NAME: {
-                this.state.user.lastName = event.target.value
+                userState.lastName = event.target.value
                 break;
             }
             case Constants.ADDRESS: {
-                this.state.user.address = event.target.value
+                userState.address = event.target.value
                 break;
             }
             case Constants.EMAIL: {
-                this.state.user.email = event.target.value
+                userState.email = event.target.value
                 break;
             }
             case Constants.PASSWORD: {
-                this.state.user.password = event.target.value
+                userState.password = event.target.value
+                break;
+            }
+            default: {
+                break;
             }
         }
-
+        this.setState({ user: userState });
     }
 
     render() {

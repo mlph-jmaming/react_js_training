@@ -1,20 +1,22 @@
 import React from 'react';
-import Tabs from "./components/tabs/Tabs";
 import "./App.css";
-import Home from './screens/home/Home';
 import Login from './screens/login/Login';
 import Register from './screens/register/Register'
 import Dialog from '@material-ui/core/Dialog';
-import Order from './screens/order/Order';
+import DashBoard from './screens/dashboard/DashBoard';
+import LoggedInUser from './screens/logged-in-user/LoggedInUser'
 
-var isLogin = false;
+const LOGIN = 'login';
+const REGISTER = 'register';
+var type = LOGIN;
 
 const App = () => {
 
   const [open, setOpen] = React.useState(false);
+  const [user, setUser] = React.useState();
 
   const loginOnClick = () => {
-    isLogin = true;
+    type = LOGIN;
     setOpen(true);
   };
 
@@ -23,40 +25,53 @@ const App = () => {
   };
 
   const registerOnClick = () => {
-    console.log(isLogin);
+    type = REGISTER;
     setOpen(true);
+  }
+
+  const setUserLoggedIn = (loggedInUser) => {
+    console.log(loggedInUser);
+    setUser(loggedInUser);
+  }
+
+  const isUserLoggedIn = () => {
+    if (user != null) {
+      return <LoggedInUser />
+
+    } else {
+      return <DashBoard />
+    }
+  }
+
+  const loginLogOutButton = () => {
+    if (user != null) {
+      return <div className="login-container">
+        <a href={() => '#'} onClick={() => setUserLoggedIn(null)} className="login-style">Logout</a>
+      </div>
+    }
+    else {
+      return <div className="login-container">
+        <a href={() => '#'} onClick={loginOnClick} className="login-style">Login</a>
+        <p className="login-style"> / </p>
+        <a href={() => '#'} onClick={registerOnClick} className="login-style">Sign up</a>
+      </div>
+    }
   }
 
   return (
     <div className="main-container">
       <div className="center-container">
-        <Tabs>
-          <div label="Home Page" >
-            <div className="content">
-              <Home />
-            </div>
-          </div>
-          <div label="About Us">
-            <div className="content">
-              <Order />
-            </div>
-          </div>
-          <div label="Contact Us">
-            <div className="content">
-              <a>Contact us</a>!
-            </div>
-          </div>
-        </Tabs>
-        <div className="login-container">
-          <a onClick={loginOnClick} className="login-style">Login</a>
-          <p className="login-style"> / </p>
-          <a onClick={registerOnClick} className="login-style">Sign up</a>
-        </div>
+        {
+          isUserLoggedIn()
+        }
+        {
+          loginLogOutButton()
+        }
       </div>
 
       <Dialog open={open} onClose={handleClose}>
         {
-          isLogin ? <Login handleClose={handleClose} /> : <Register handleClose={handleClose} />
+          type === LOGIN ? <Login handleClose={handleClose} setUserLoggedIn={setUserLoggedIn} /> : <Register handleClose={handleClose} />
         }
       </Dialog>
     </div>

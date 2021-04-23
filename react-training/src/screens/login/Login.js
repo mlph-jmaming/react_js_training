@@ -15,21 +15,23 @@ class Login extends Component {
         const user = users.filter(account =>
             account.email === this.state.email && account.password === this.state.password
         ).map(item => item);
-        console.log('user', user);
         if (user.length > 0) {
-            console.log('login success');
+            this.props.setUserLoggedIn(user[0]);
             this.props.handleClose();
+            alert('Welcome ' + user[0].firstName);
             return;
         }
         alert('Email or password incorrect');
     }
 
     onInputChange = (type, value) => {
+        const userState = { ...this.state };
         if (type === Constants.EMAIL) {
-            this.state.email = value;
+            userState.email = value;
         } else if (type === Constants.PASSWORD) {
-            this.state.password = value;
+            userState.password = value;
         }
+        this.setState(userState);
     }
 
     render() {
