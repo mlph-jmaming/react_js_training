@@ -43,6 +43,13 @@
 .login-style {
   height: max-content;
   cursor: pointer;
+  background: transparent;
+  border: transparent;
+  color: blue;
+}
+
+.login-style:hover {
+  text-decoration: underline;
 }
 
 .content {

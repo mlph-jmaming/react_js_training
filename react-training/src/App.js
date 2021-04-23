@@ -46,14 +46,14 @@ const App = () => {
   const loginLogOutButton = () => {
     if (user != null) {
       return <div className="login-container">
-        <a href={() => '#'} onClick={() => setUserLoggedIn(null)} className="login-style">Logout</a>
+        <button onClick={() => setUserLoggedIn(null)} className="login-style">Logout</button>
       </div>
     }
     else {
       return <div className="login-container">
-        <a href={() => '#'} onClick={loginOnClick} className="login-style">Login</a>
+        <button onClick={loginOnClick} className="login-style">Login</button>
         <p className="login-style"> / </p>
-        <a href={() => '#'} onClick={registerOnClick} className="login-style">Sign up</a>
+        <button onClick={registerOnClick} className="login-style">Sign up</button>
       </div>
     }
   }

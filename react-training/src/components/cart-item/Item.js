@@ -11,12 +11,12 @@ class Item extends Component {
     render() {
         return (
             <div className="item-container">
-                <img className="item-image"
+                <img alt="" className="item-image"
                     src={this.state.imageUrl}></img>
                 <div>
                     <p className="center-text">{this.state.title}</p>
                     <div className="button-container">
-                        <a className="buy-style">Buy</a>
+                        <button className="buy-style">Buy</button>
                     </div>
                 </div>
             </div>

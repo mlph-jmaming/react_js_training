@@ -30,10 +30,15 @@
 }
 
 .buy-style {
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-right: 10px;
+  height: max-content;
   cursor: pointer;
+  background: transparent;
+  border: transparent;
+  color: blue;
+}
+
+.buy-style:hover {
+  text-decoration: underline;
 }
 
 .center-text {

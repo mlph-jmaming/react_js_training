@@ -32,10 +32,18 @@
 }
 
 .view-style {
+  height: max-content;
+  cursor: pointer;
+  background: transparent;
+  border: transparent;
+  color: blue;
   margin-top: auto;
   margin-bottom: auto;
   margin-right: 10px;
-  cursor: pointer;
+}
+
+.view-style:hover {
+  text-decoration: underline;
 }
 
 .center-text {

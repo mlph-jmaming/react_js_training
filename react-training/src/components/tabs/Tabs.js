@@ -33,13 +33,12 @@ class Tabs extends Component {
         return (
             <div className="tabs">
                 <ol className="tab-list">
-                    {children.map((child) => {
+                    {children.map((child, index) => {
                         const { label } = child.props;
-
                         return (
                             <Tab
                                 activeTab={activeTab}
-                                key={label}
+                                key={index}
                                 label={label}
                                 onClick={onClickTabItem}
                             />

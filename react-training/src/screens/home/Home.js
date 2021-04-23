@@ -48,6 +48,7 @@ const tileData = [
 class Home extends Component {
 
     render() {
+        console.log("Home");
         return (
             <div className="grid-container">
                 <GridList cols={3} cellHeight={250} style={{ height: 'auto' }} >
