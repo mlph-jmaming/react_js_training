@@ -19,3 +19,9 @@
   width: 400px;
   text-align: start;
 }
+
+.button-buy {
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}

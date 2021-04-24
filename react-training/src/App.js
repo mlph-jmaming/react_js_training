@@ -40,6 +40,11 @@ const App = () => {
     setOpen(true);
   }
 
+  const orderOnClick = order => {
+    Constants.saveToLocalStorage(Constants.ORDER, order);
+    setOpen(false);
+  }
+
   const setUserLoggedIn = (loggedInUser) => {
     setUser(loggedInUser);
   }
@@ -82,7 +87,7 @@ const App = () => {
         return <Register handleClose={handleClose} />
       }
       case Constants.BUY: {
-        return <ItemDetails selectedProduct={selectedProduct} />
+        return <ItemDetails selectedProduct={selectedProduct} orderOnClick={orderOnClick} />
       }
       default: {
         break;

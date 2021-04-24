@@ -16,6 +16,7 @@ class Register extends Component {
         this.state.users = Constants.getToLocalStorage(Constants.DATA_USER) === null ? []
             : Constants.getToLocalStorage(Constants.DATA_USER);
         this.state.user = new User();
+
     }
 
 
@@ -35,6 +36,9 @@ class Register extends Component {
 
     onTextChange = (event, type) => {
         const userState = { ...this.state.user };
+        if (userState.id === 0) {
+            userState.id = this.state.users.length + 1;
+        }
         switch (type) {
             case Constants.FIRST_NAME: {
                 userState.firstName = event.target.value;

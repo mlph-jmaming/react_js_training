@@ -7,6 +7,7 @@ export class Constants {
     static EMAIL = 'email';
     static PASSWORD = 'password';
     static LOGGED_IN_USER = "logged in user";
+    static ORDER = "order";
 
     static LOGIN = "login";
     static SIGN_UP = "sign up";

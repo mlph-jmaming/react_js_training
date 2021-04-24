@@ -6,7 +6,12 @@ import { User } from "../../model/user"
 class ItemDetails extends Component {
 
     state = {
-        user: <User />
+        user: <User />,
+        order: {
+            productId: 0,
+            userId: 0,
+            quantity: 0
+        }
     }
 
     constructor() {
@@ -14,29 +19,21 @@ class ItemDetails extends Component {
         this.state.user = Constants.getToLocalStorage(Constants.LOGGED_IN_USER);
     }
 
-    onLoginClick = () => {
-        const users = Constants.getToLocalStorage(Constants.DATA_USER);
-        console.log('Users', users);
-        const user = users.filter(account =>
-            account.email === this.state.email && account.password === this.state.password
-        ).map(item => item);
-        if (user.length > 0) {
-            this.props.setUserLoggedIn(user[0]);
-            this.props.handleClose();
-            alert('Welcome ' + user[0].firstName);
-            return;
-        }
-        alert('Email or password incorrect');
+    onInputChange(quantity) {
+        const userState = { ...this.state };
+        userState.order.quantity = quantity;
+        this.setState(userState);
     }
 
-    onInputChange = (type, value) => {
-        const userState = { ...this.state };
-        if (type === Constants.EMAIL) {
-            userState.email = value;
-        } else if (type === Constants.PASSWORD) {
-            userState.password = value;
+    onClickOrder() {
+        if (this.state.order.quantity === 0) {
+            alert('Please add quantity.');
+            return;
         }
-        this.setState(userState);
+        const order = { ...this.state.order };
+        order.productId = this.props.selectedProduct.id;
+        order.userId = this.state.user.id;
+        this.props.orderOnClick(order);
     }
 
     render() {
@@ -44,15 +41,17 @@ class ItemDetails extends Component {
             <div className="details-container">
                 <img alt="" className="item-details-image"
                     src={this.props.selectedProduct.image}></img>
-                <p className="details-format">{this.props.selectedProduct.title}</p>
-                <p className="details-format">Deliver Address: {this.state.user.address}</p>
-
+                <p className="details-format">{this.props.selectedProduct.productName}</p>
+                <p className="details-format">Price : P {this.props.selectedProduct.productPrice}</p>
+                <p className="details-format">Quantity : <input onChange={(e) => this.onInputChange(e.target.value)} type="number"></input></p>
+                <p className="details-format">Total : {this.props.selectedProduct.productPrice * this.state.order.quantity}</p>
+                <p className="details-format">Deliver Address : {this.state.user.address}</p>
+                <br />
                 <p className="details-format">Seller info</p>
-                <p className="details-format">Name: {this.props.selectedProduct.sellerName}</p>
-                <p className="details-format">Pick-up Address: {this.props.selectedProduct.sellerAddress}</p>
+                <p className="details-format">Name : {this.props.selectedProduct.sellerName}</p>
+                <p className="details-format">Pick-up Address : {this.props.selectedProduct.sellerAddress}</p>
 
-
-
+                <button onClick={() => this.onClickOrder()} className={"button-buy"}>Buy</button>
 
             </div>
         );
