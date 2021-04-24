@@ -11,12 +11,10 @@ import { Constants } from './Constants';
 var type = '';
 var selectedProduct;
 
-const App = (
-
-) => {
+const App = () => {
 
   const [open, setOpen] = React.useState(false);
-  let [user, setUser] = React.useState();
+  let [user, setUser] = React.useState(Constants.getToLocalStorage(Constants.LOGGED_IN_USER));
 
   const loginOnClick = () => {
     type = Constants.LOGIN;
@@ -33,6 +31,10 @@ const App = (
   }
 
   const onClickBuy = productData => {
+    if (user === null) {
+      alert('Please login first.')
+      return;
+    }
     selectedProduct = productData;
     type = Constants.BUY;
     setOpen(true);
@@ -49,7 +51,7 @@ const App = (
 
   const isUserLoggedIn = () => {
     if (user != null) {
-      return <LoggedInUser />
+      return <LoggedInUser onClickBuy={onClickBuy} />
 
     } else {
       return <DashBoard onClickBuy={onClickBuy} />
@@ -72,7 +74,6 @@ const App = (
   }
 
   const showDialog = () => {
-    console.log("showDialog", type);
     switch (type) {
       case Constants.LOGIN: {
         return <Login handleClose={handleClose} setUserLoggedIn={setUserLoggedIn} />;
