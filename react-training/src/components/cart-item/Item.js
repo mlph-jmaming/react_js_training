@@ -3,20 +3,15 @@ import "./item.css"
 
 class Item extends Component {
 
-    state = {
-        imageUrl: this.props.imageUrl,
-        title: this.props.title
-    }
-
     render() {
         return (
             <div className="item-container">
                 <img alt="" className="item-image"
-                    src={this.state.imageUrl}></img>
+                    src={this.props.productData.image}></img>
                 <div>
-                    <p className="center-text">{this.state.title}</p>
+                    <p className="center-text">{this.props.productData.productName}</p>
                     <div className="button-container">
-                        <button className="buy-style">Buy</button>
+                        <button onClick={() => this.props.onClickBuy(this.props.productData)} className="buy-style">Buy</button>
                     </div>
                 </div>
             </div>

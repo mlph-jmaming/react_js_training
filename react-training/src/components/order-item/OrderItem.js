@@ -5,7 +5,7 @@ class OrderItem extends Component {
 
     state = {
         imageUrl: this.props.imageUrl,
-        title: this.props.title,
+        productName: this.props.productName,
         status: 'pending'
     }
 
@@ -15,7 +15,7 @@ class OrderItem extends Component {
                 <img alt="" className="item-image"
                     src={this.state.imageUrl}></img>
                 <div>
-                    <p className="center-text">{this.state.title}</p>
+                    <p className="center-text">{this.state.productName}</p>
                     <div className="button-container ">
                         <p>Status : {this.state.status}</p>
                         <button className="view-style">View</button>

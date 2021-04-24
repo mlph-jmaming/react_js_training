@@ -1,12 +1,17 @@
 import { Component } from "react";
-import "./Login.css"
 import { Constants } from "../../Constants";
+import "./ItemDetails.css";
+import { User } from "../../model/user"
 
-class Login extends Component {
+class ItemDetails extends Component {
 
     state = {
-        email: '',
-        password: ''
+        user: <User />
+    }
+
+    constructor() {
+        super();
+        this.state.user = Constants.getToLocalStorage(Constants.LOGGED_IN_USER);
     }
 
     onLoginClick = () => {
@@ -19,7 +24,6 @@ class Login extends Component {
             this.props.setUserLoggedIn(user[0]);
             this.props.handleClose();
             alert('Welcome ' + user[0].firstName);
-            Constants.saveToLocalStorage(Constants.LOGGED_IN_USER, user[0]);
             return;
         }
         alert('Email or password incorrect');
@@ -37,16 +41,22 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="login-page-container">
-                <p>Email</p>
-                <input type="email" onChange={(e) => this.onInputChange(Constants.EMAIL, e.target.value)}></input>
+            <div className="details-container">
+                <img alt="" className="item-details-image"
+                    src={this.props.selectedProduct.image}></img>
+                <p className="details-format">{this.props.selectedProduct.title}</p>
+                <p className="details-format">Deliver Address: {this.state.user.address}</p>
 
-                <p className="text-style">Password</p>
-                <input type="password" onChange={(e) => this.onInputChange(Constants.PASSWORD, e.target.value)}></input>
-                <button onClick={this.onLoginClick} className="btn-login">Login</button>
+                <p className="details-format">Seller info</p>
+                <p className="details-format">Name: {this.props.selectedProduct.sellerName}</p>
+                <p className="details-format">Pick-up Address: {this.props.selectedProduct.sellerAddress}</p>
+
+
+
+
             </div>
         );
     }
 }
 
-export default Login;
+export default ItemDetails;
