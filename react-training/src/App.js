@@ -42,7 +42,6 @@ const App = () => {
   }
 
   const onViewOrder = selectedOrder => {
-    console.log('view clicked');
     selectedProduct = selectedOrder;
     type = Constants.VIEW_ORDER;
     setOpen(true);
@@ -53,6 +52,17 @@ const App = () => {
     newOrders.push(order);
     setOrders(newOrders);
     Constants.saveToLocalStorage(Constants.ORDER, orders);
+    setOpen(false);
+  }
+
+  const orderReceive = orderItem => {
+    const oldRecord = Constants.getToLocalStorage(Constants.ORDER);
+    var commentIndex = oldRecord.findIndex(function (c) {
+      return c.id === orderItem.id;
+    });
+
+    oldRecord[commentIndex].status = Constants.STATUS_COMPLETED;
+    Constants.saveToLocalStorage(Constants.ORDER, oldRecord);
     setOpen(false);
   }
 
@@ -97,9 +107,9 @@ const App = () => {
       case Constants.SIGN_UP: {
         return <Register handleClose={handleClose} />
       }
-      case Constants.BUY: {
-        return <ItemDetails selectedProduct={selectedProduct} orderOnClick={orderOnClick} />
-      }
+      case Constants.BUY:
+      case Constants.VIEW_ORDER:
+        return <ItemDetails selectedProduct={selectedProduct} orderOnClick={orderOnClick} orderReceive={orderReceive} />
       default: {
         break;
       }

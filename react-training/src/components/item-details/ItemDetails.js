@@ -12,7 +12,7 @@ class ItemDetails extends Component {
             productId: 0,
             userId: 0,
             quantity: 0,
-            status: "pending",
+            status: "",
             image: '',
             productName: '',
             price: 0,
@@ -22,9 +22,10 @@ class ItemDetails extends Component {
         }
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state.user = Constants.getToLocalStorage(Constants.LOGGED_IN_USER);
+        this.state.order = this.props.selectedProduct;
     }
 
     onInputChange(quantity) {
@@ -34,40 +35,54 @@ class ItemDetails extends Component {
     }
 
     onClickOrder() {
-        if (this.state.order.quantity === 0) {
+        if (this.state.order.quantity <= 1) {
             alert('Please add quantity.');
             return;
         }
         const order = { ...this.state.order };
         order.id = Constants.getToLocalStorage(Constants.ORDER) === null ? 1 : Constants.getToLocalStorage(Constants.ORDER).length + 1;
-        order.productId = this.props.selectedProduct.id;
+        order.productId = this.state.order.id;
         order.userId = this.state.user.id;
         order.status = Constants.STATUS_PENDING;
-        order.image = this.props.selectedProduct.image;
-        order.productName = this.props.selectedProduct.productName;
-        order.price = this.props.selectedProduct.productPrice;
+        order.image = this.state.order.image;
+        order.productName = this.state.order.productName;
+        order.productPrice = this.state.order.productPrice;
         order.deliveryAddress = this.state.user.address;
-        order.sellerName = this.props.selectedProduct.sellerName;
-        order.sellerAddress = this.props.selectedProduct.sellerAddress;
+        order.sellerName = this.state.order.sellerName;
+        order.sellerAddress = this.state.order.sellerAddress;
         this.props.orderOnClick(order);
+    }
+
+    displayButtonAction() {
+        if (this.state.order.status !== undefined && this.state.order.status === Constants.STATUS_PENDING) {
+            return <button onClick={() => this.props.orderReceive(this.state.order)} className={"button-buy"}>Order Received</button>
+        } else if (this.state.order.status === Constants.STATUS_COMPLETED) {
+            return;
+        }
+        return <button onClick={() => this.onClickOrder()} className={"button-buy"}>Buy</button>
+
     }
 
     render() {
         return (
             <div className="details-container">
                 <img alt="" className="item-details-image"
-                    src={this.props.selectedProduct.image}></img>
-                <p className="details-format">{this.props.selectedProduct.productName}</p>
-                <p className="details-format">Price : P {this.props.selectedProduct.productPrice}</p>
-                <p className="details-format">Quantity : <input onChange={(e) => this.onInputChange(e.target.value)} type="number"></input></p>
-                <p className="details-format">Total : {this.props.selectedProduct.productPrice * this.state.order.quantity}</p>
+                    src={this.state.order.image}></img>
+                <p className="details-format">{this.state.order.productName}</p>
+                <p className="details-format">Price : P {this.state.order.productPrice}</p>
+                <p className="details-format">Quantity : <input onChange={(e) => this.onInputChange(e.target.value)}
+                    value={this.state.order.quantity}
+                    type="number"></input></p>
+                <p className="details-format">Total : {this.state.order.productPrice * this.state.order.quantity === isNaN
+                    ? 0 : this.state.order.quantity}</p>
                 <p className="details-format">Deliver Address : {this.state.user.address}</p>
                 <br />
                 <p className="details-format">Seller info</p>
-                <p className="details-format">Name : {this.props.selectedProduct.sellerName}</p>
-                <p className="details-format">Pick-up Address : {this.props.selectedProduct.sellerAddress}</p>
-
-                <button onClick={() => this.onClickOrder()} className={"button-buy"}>Buy</button>
+                <p className="details-format">Name : {this.state.order.sellerName}</p>
+                <p className="details-format">Pick-up Address : {this.state.order.sellerAddress}</p>
+                {
+                    this.displayButtonAction()
+                }
 
             </div>
         );

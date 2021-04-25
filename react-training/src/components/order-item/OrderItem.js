@@ -12,7 +12,7 @@ class OrderItem extends Component {
                     <p className="center-text">{this.props.data.productName}</p>
                     <div className="button-container ">
                         <p>Status : {this.props.data.status}</p>
-                        <button onClick={() => this.props.onClickViewOrder()} className="view-style">View</button>
+                        <button onClick={() => this.props.onClickViewOrder(this.props.data)} className="view-style">View</button>
                     </div>
                 </div>
             </div>

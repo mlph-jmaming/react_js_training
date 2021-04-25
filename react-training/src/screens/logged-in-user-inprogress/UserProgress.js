@@ -14,7 +14,6 @@ export default class UserProgress extends Component {
 
     constructor() {
         super();
-        console.log("constructor called");
         this.state.orders = Constants.getToLocalStorage(Constants.ORDER) === null
             ? [] : Constants.getToLocalStorage(Constants.ORDER)
                 .filter(item => item.userId === this.state.user.id
@@ -24,7 +23,6 @@ export default class UserProgress extends Component {
     }
 
     render() {
-        console.log("render called");
         return (
             <div className="progress-container">
                 <GridList cols={3} cellHeight={260} style={{ height: 'auto' }} >
