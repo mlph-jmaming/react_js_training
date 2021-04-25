@@ -8,9 +8,17 @@ class ItemDetails extends Component {
     state = {
         user: <User />,
         order: {
+            id: 0,
             productId: 0,
             userId: 0,
-            quantity: 0
+            quantity: 0,
+            status: "pending",
+            image: '',
+            productName: '',
+            price: 0,
+            deliveryAddress: '',
+            sellerName: '',
+            sellerAddress: ''
         }
     }
 
@@ -31,8 +39,16 @@ class ItemDetails extends Component {
             return;
         }
         const order = { ...this.state.order };
+        order.id = Constants.getToLocalStorage(Constants.ORDER) === null ? 1 : Constants.getToLocalStorage(Constants.ORDER).length + 1;
         order.productId = this.props.selectedProduct.id;
         order.userId = this.state.user.id;
+        order.status = Constants.STATUS_PENDING;
+        order.image = this.props.selectedProduct.image;
+        order.productName = this.props.selectedProduct.productName;
+        order.price = this.props.selectedProduct.productPrice;
+        order.deliveryAddress = this.state.user.address;
+        order.sellerName = this.props.selectedProduct.sellerName;
+        order.sellerAddress = this.props.selectedProduct.sellerAddress;
         this.props.orderOnClick(order);
     }
 

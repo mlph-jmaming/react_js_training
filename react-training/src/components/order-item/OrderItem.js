@@ -3,22 +3,16 @@ import "./OrderItem.css";
 
 class OrderItem extends Component {
 
-    state = {
-        imageUrl: this.props.imageUrl,
-        productName: this.props.productName,
-        status: 'pending'
-    }
-
     render() {
         return (
             <div className="item-container">
                 <img alt="" className="item-image"
-                    src={this.state.imageUrl}></img>
+                    src={this.props.data.image}></img>
                 <div>
-                    <p className="center-text">{this.state.productName}</p>
+                    <p className="center-text">{this.props.data.productName}</p>
                     <div className="button-container ">
-                        <p>Status : {this.state.status}</p>
-                        <button className="view-style">View</button>
+                        <p>Status : {this.props.data.status}</p>
+                        <button onClick={() => this.props.onClickViewOrder()} className="view-style">View</button>
                     </div>
                 </div>
             </div>

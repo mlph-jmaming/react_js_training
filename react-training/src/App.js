@@ -14,7 +14,8 @@ var selectedProduct;
 const App = () => {
 
   const [open, setOpen] = React.useState(false);
-  let [user, setUser] = React.useState(Constants.getToLocalStorage(Constants.LOGGED_IN_USER));
+  const [user, setUser] = React.useState(Constants.getToLocalStorage(Constants.LOGGED_IN_USER));
+  const [orders, setOrders] = React.useState(Constants.getToLocalStorage(Constants.ORDER) == null ? [] : Constants.getToLocalStorage(Constants.ORDER));
 
   const loginOnClick = () => {
     type = Constants.LOGIN;
@@ -40,8 +41,18 @@ const App = () => {
     setOpen(true);
   }
 
+  const onViewOrder = selectedOrder => {
+    console.log('view clicked');
+    selectedProduct = selectedOrder;
+    type = Constants.VIEW_ORDER;
+    setOpen(true);
+  }
+
   const orderOnClick = order => {
-    Constants.saveToLocalStorage(Constants.ORDER, order);
+    const newOrders = orders;
+    newOrders.push(order);
+    setOrders(newOrders);
+    Constants.saveToLocalStorage(Constants.ORDER, orders);
     setOpen(false);
   }
 
@@ -56,10 +67,10 @@ const App = () => {
 
   const isUserLoggedIn = () => {
     if (user != null) {
-      return <LoggedInUser onClickBuy={onClickBuy} />
+      return <LoggedInUser onClickBuy={onClickBuy} onClickViewOrder={onViewOrder} />
 
     } else {
-      return <DashBoard onClickBuy={onClickBuy} />
+      return <DashBoard onClickBuy={onClickBuy} onClickViewOrder={onViewOrder} />
     }
   }
 

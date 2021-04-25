@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import "./LoggedInUser.css";
 import Tabs from "../../components/tabs/Tabs";
 import Home from '../home/Home';
-import Order from '../order/Order';
+import UserProgress from "../logged-in-user-inprogress/UserProgress";
+import UserCompleted from "../logged-in-user-completed/UserCompleted";
+
 
 class LoggedInUser extends Component {
     render() {
@@ -15,12 +17,12 @@ class LoggedInUser extends Component {
                 </div>
                 <div label="Inprogress">
                     <div className="content">
-                        <Order />
+                        <UserProgress onClickViewOrder={this.props.onClickViewOrder} />
                     </div>
                 </div>
                 <div label="Completed">
                     <div className="content">
-
+                        <UserCompleted onClickViewOrder={this.props.onClickViewOrder} />
                     </div>
                 </div>
             </Tabs>
