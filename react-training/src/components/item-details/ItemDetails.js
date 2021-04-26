@@ -19,18 +19,27 @@ class ItemDetails extends Component {
             deliveryAddress: '',
             sellerName: '',
             sellerAddress: ''
-        }
+        },
+        totalPrice: 0
+
     }
 
     constructor(props) {
         super(props);
         this.state.user = Constants.getToLocalStorage(Constants.LOGGED_IN_USER);
         this.state.order = this.props.selectedProduct;
+        if (this.state.order.quantity.isNaN || this.state.order.quantity === undefined) {
+            this.state.totalPrice = this.state.order.productPrice * 0;
+        } else {
+            this.state.totalPrice = this.state.order.productPrice * this.state.order.quantity;
+        }
+
     }
 
     onInputChange(quantity) {
         const userState = { ...this.state };
         userState.order.quantity = quantity;
+        userState.totalPrice = this.state.order.productPrice * quantity;
         this.setState(userState);
     }
 
@@ -63,6 +72,14 @@ class ItemDetails extends Component {
 
     }
 
+    isInputTextDisabled() {
+        if (this.state.order.status === Constants.STATUS_COMPLETED ||
+            this.state.order.status === Constants.STATUS_PENDING) {
+            return true;
+        }
+        return false;
+    }
+
     render() {
         return (
             <div className="details-container">
@@ -70,11 +87,10 @@ class ItemDetails extends Component {
                     src={this.state.order.image}></img>
                 <p className="details-format">{this.state.order.productName}</p>
                 <p className="details-format">Price : P {this.state.order.productPrice}</p>
-                <p className="details-format">Quantity : <input onChange={(e) => this.onInputChange(e.target.value)}
+                <p className="details-format">Quantity : <input disabled={this.isInputTextDisabled()} onChange={(e) => this.onInputChange(e.target.value)}
                     value={this.state.order.quantity}
                     type="number"></input></p>
-                <p className="details-format">Total : {this.state.order.productPrice * this.state.order.quantity === isNaN
-                    ? 0 : this.state.order.quantity}</p>
+                <p className="details-format">Total : P {this.state.totalPrice}</p>
                 <p className="details-format">Deliver Address : {this.state.user.address}</p>
                 <br />
                 <p className="details-format">Seller info</p>

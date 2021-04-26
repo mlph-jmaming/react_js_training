@@ -26,7 +26,8 @@ export class Constants {
             productName: "Qualcomm Processor",
             sellerName: "Seller 1",
             sellerAddress: "seller address 1",
-            productPrice: 100
+            productPrice: 100,
+            quantity: 0
         },
         {
             id: 2,
@@ -34,7 +35,8 @@ export class Constants {
             productName: "Best blender",
             sellerName: "Seller 2",
             sellerAddress: "seller address 2",
-            productPrice: 150
+            productPrice: 150,
+            quantity: 0
         }
         , {
             id: 3,
@@ -42,7 +44,8 @@ export class Constants {
             productName: "Inter core i7 Processor",
             sellerName: "Seller 3",
             sellerAddress: "seller address 3",
-            productPrice: 200
+            productPrice: 200,
+            quantity: 0
         },
         {
             id: 4,
@@ -50,14 +53,16 @@ export class Constants {
             productName: "China Android Phone",
             sellerName: "Seller 4",
             sellerAddress: "seller address 4",
-            productPrice: 250
+            productPrice: 250,
+            quantity: 0
         }, {
             id: 5,
             image: "https://static.digit.in/default/af95abb7dda55996880198f9507dfcf0e87368fe.jpeg",
             productName: "Samsung Android",
             sellerName: "Seller 5",
             sellerAddress: "seller address 5",
-            productPrice: 300
+            productPrice: 300,
+            quantity: 0
         },
         {
             id: 6,
@@ -65,7 +70,8 @@ export class Constants {
             productName: "Buy 1 take 3",
             sellerName: "Seller 6",
             sellerAddress: "seller address 6",
-            productPrice: 350
+            productPrice: 350,
+            quantity: 0
         },
         {
             id: 7,
@@ -73,7 +79,8 @@ export class Constants {
             productName: "Android 10 mobile phone",
             sellerName: "Seller 7",
             sellerAddress: "seller address 7",
-            productPrice: 400
+            productPrice: 400,
+            quantity: 0
         },
         {
             id: 8,
@@ -81,7 +88,8 @@ export class Constants {
             productName: "New Smart phone",
             sellerName: "Seller 8",
             sellerAddress: "seller address 8",
-            productPrice: 500
+            productPrice: 500,
+            quantity: 0
         }
     ];
 
