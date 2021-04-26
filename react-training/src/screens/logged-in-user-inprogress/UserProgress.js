@@ -29,7 +29,9 @@ export default class UserProgress extends Component {
                     {
                         this.state.orders.map(order =>
                             <ul key={order.id}>
-                                <OrderItem key={order.title} data={order} onClickViewOrder={this.props.onClickViewOrder} />
+                                <OrderItem key={order.title} data={order}
+                                    user={this.props.user}
+                                    onClickViewOrder={this.props.onClickViewOrder} />
                             </ul>
                         )
                     }

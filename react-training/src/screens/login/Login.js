@@ -10,8 +10,17 @@ class Login extends Component {
     }
 
     onLoginClick = () => {
+
+        // Admin
+        if (this.state.email === 'admin' && this.state.password === 'admin') {
+            Constants.saveToLocalStorage(Constants.LOGGED_IN_USER, this.state);
+            this.props.setUserLoggedIn(this.state);
+            this.props.handleClose();
+            return;
+        }
+
+        //User 
         const users = Constants.getToLocalStorage(Constants.DATA_USER);
-        console.log('Users', users);
         const user = users.filter(account =>
             account.email === this.state.email && account.password === this.state.password
         ).map(item => item);
@@ -38,7 +47,7 @@ class Login extends Component {
     render() {
         return (
             <div className="login-page-container">
-                <p>Email</p>
+                <p>Email/User name</p>
                 <input type="email" onChange={(e) => this.onInputChange(Constants.EMAIL, e.target.value)}></input>
 
                 <p className="text-style">Password</p>

@@ -17,12 +17,12 @@ class LoggedInUser extends Component {
                 </div>
                 <div label="Inprogress">
                     <div className="content">
-                        <UserProgress onClickViewOrder={this.props.onClickViewOrder} />
+                        <UserProgress onClickViewOrder={this.props.onClickViewOrder} user={this.props.user} />
                     </div>
                 </div>
                 <div label="Completed">
                     <div className="content">
-                        <UserCompleted onClickViewOrder={this.props.onClickViewOrder} />
+                        <UserCompleted onClickViewOrder={this.props.onClickViewOrder} user={this.props.user} />
                     </div>
                 </div>
             </Tabs>

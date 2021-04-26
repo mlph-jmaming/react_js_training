@@ -79,7 +79,7 @@ class Register extends Component {
                 <p className="title-style">Address:</p>
                 <input type="text" onChange={(event) => this.onTextChange(event, Constants.ADDRESS)}></input>
 
-                <p className="title-style">Email:</p>
+                <p className="title-style">Email/User name:</p>
                 <input type="text" onChange={(event) => this.onTextChange(event, Constants.EMAIL)}></input>
 
                 <p className="title-style" >Password:</p>

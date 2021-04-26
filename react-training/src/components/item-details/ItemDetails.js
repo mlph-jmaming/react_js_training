@@ -34,6 +34,8 @@ class ItemDetails extends Component {
             this.state.totalPrice = this.state.order.productPrice * this.state.order.quantity;
         }
 
+        console.log(this.props);
+
     }
 
     onInputChange(quantity) {
@@ -63,10 +65,14 @@ class ItemDetails extends Component {
     }
 
     displayButtonAction() {
-        if (this.state.order.status !== undefined && this.state.order.status === Constants.STATUS_PENDING) {
+        if (this.state.order.status !== undefined && this.state.order.status === Constants.STATUS_PENDING
+            && this.state.user.email !== 'admin') {
             return <button onClick={() => this.props.orderReceive(this.state.order)} className={"button-buy"}>Order Received</button>
         } else if (this.state.order.status === Constants.STATUS_COMPLETED) {
             return;
+        } else if (this.state.user.email === 'admin') {
+            return <button onClick={() => this.props.onOrderApproved(this.state.order)} className={"button-buy"}>Approve</button>
+
         }
         return <button onClick={() => this.onClickOrder()} className={"button-buy"}>Buy</button>
 
