@@ -18,7 +18,6 @@ const App = () => {
   const [user, setUser] = React.useState(Constants.getToLocalStorage(Constants.LOGGED_IN_USER));
   const [orders, setOrders] = React.useState(Constants.getToLocalStorage(Constants.ORDER) == null ? [] : Constants.getToLocalStorage(Constants.ORDER));
   const [userInprogress, setUserInprogress] = React.useState([]);
-  const [adminOrders, setAdminOrders] = React.useState([]);
 
   const loginOnClick = () => {
     type = Constants.LOGIN;

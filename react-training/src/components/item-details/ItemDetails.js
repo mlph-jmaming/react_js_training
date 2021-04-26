@@ -34,8 +34,6 @@ class ItemDetails extends Component {
             this.state.totalPrice = this.state.order.productPrice * this.state.order.quantity;
         }
 
-        console.log(this.props);
-
     }
 
     onInputChange(quantity) {
@@ -61,16 +59,20 @@ class ItemDetails extends Component {
         order.deliveryAddress = this.state.user.address;
         order.sellerName = this.state.order.sellerName;
         order.sellerAddress = this.state.order.sellerAddress;
+        order.customerName = this.state.user.firstName + " " + this.state.user.lastName;
         this.props.orderOnClick(order);
     }
 
     displayButtonAction() {
-        if (this.state.order.status !== undefined && this.state.order.status === Constants.STATUS_PENDING
+        if (this.state.order.status !== undefined && this.state.order.status === Constants.STATUS_TO_RECEIVE
             && this.state.user.email !== 'admin') {
             return <button onClick={() => this.props.orderReceive(this.state.order)} className={"button-buy"}>Order Received</button>
         } else if (this.state.order.status === Constants.STATUS_COMPLETED) {
             return;
-        } else if (this.state.user.email === 'admin') {
+        } else if (this.state.order.status === Constants.STATUS_PENDING && this.state.user.email !== 'admin') {
+            return <p>Note: Your order is in process..</p>;
+        }
+        else if (this.state.user.email === 'admin') {
             return <button onClick={() => this.props.onOrderApproved(this.state.order)} className={"button-buy"}>Approve</button>
 
         }
@@ -80,10 +82,19 @@ class ItemDetails extends Component {
 
     isInputTextDisabled() {
         if (this.state.order.status === Constants.STATUS_COMPLETED ||
-            this.state.order.status === Constants.STATUS_PENDING) {
+            this.state.order.status === Constants.STATUS_PENDING ||
+            this.state.order.status === Constants.STATUS_TO_RECEIVE) {
             return true;
         }
         return false;
+    }
+
+    getDeliveryAddress() {
+        if (this.state.order.deliveryAddress !== undefined) {
+            return this.state.order.deliveryAddress;
+        }
+        return this.state.user.address;
+
     }
 
     render() {
@@ -97,7 +108,7 @@ class ItemDetails extends Component {
                     value={this.state.order.quantity}
                     type="number"></input></p>
                 <p className="details-format">Total : P {this.state.totalPrice}</p>
-                <p className="details-format">Deliver Address : {this.state.user.address}</p>
+                <p className="details-format">Deliver Address : {this.getDeliveryAddress()}</p>
                 <br />
                 <p className="details-format">Seller info</p>
                 <p className="details-format">Name : {this.state.order.sellerName}</p>

@@ -11,6 +11,12 @@ class OrderItem extends Component {
         }
     }
 
+    getCustomerName() {
+        if (this.props.user.email === 'admin') {
+            return <p>Customer : {this.props.data.customerName}</p>
+        }
+    }
+
     render() {
         return (
             <div className="item-container">
@@ -20,6 +26,9 @@ class OrderItem extends Component {
                     <p className="center-text">{this.props.data.productName}</p>
                     <div className="button-container ">
                         <p>Status : {this.props.data.status}</p>
+                        {
+                            this.getCustomerName()
+                        }
                         <button onClick={() => this.buttonFunction()} className="view-style">View</button>
                     </div>
                 </div>
